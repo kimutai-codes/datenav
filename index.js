@@ -13,10 +13,14 @@ files.forEach((file, index) => {
 	const fileDate = new Date(strippedFileName);
 	if (fileDate != 'Invalid Date') {
 		const date = format(new Date(strippedFileName), 'yyyy-MM-dd');
+
 		let nextDay = add(new Date(date), { days: 1 });
-		let prevDay = sub(new Date(date), { days: 1 });
 		const nextDate = format(new Date(nextDay), 'yyyy-MM-dd');
-		const PrevDate = format(new Date(prevDay), 'yyyy-MM-dd');
-		console.log(PrevDate, nextDate);
+
+		let prevDay = sub(new Date(date), { days: 1 });
+		const prevDate = format(new Date(prevDay), 'yyyy-MM-dd');
+
+		console.log(prevDate, nextDate);
+		fs.writeFileSync(file, '<<' + prevDate + '|' + nextDate + '>>');
 	}
 });

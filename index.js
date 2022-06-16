@@ -2,6 +2,7 @@ const { format } = require('date-fns');
 const fs = require('fs');
 const add = require('date-fns/add');
 const sub = require('date-fns/sub');
+const path = require('path');
 
 const dirPath = '/home/kim/test';
 //read directory and return file names
@@ -21,6 +22,11 @@ files.forEach((file, index) => {
 		const prevDate = format(new Date(prevDay), 'yyyy-MM-dd');
 
 		console.log(prevDate, nextDate);
-		fs.writeFileSync(`dirPath+file`, '<<' + prevDate + '|' + nextDate + '>>');
+		const fileLocation = path.join(dirPath, file);
+		fs.writeFileSync(
+			fileLocation,
+			'<<' + prevDate + '|' + nextDate + '>>',
+			{ flag: 'w+' }
+		);
 	}
 });

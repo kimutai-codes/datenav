@@ -21,6 +21,6 @@ files.forEach((file, index) => {
 		const prevDate = format(new Date(prevDay), 'yyyy-MM-dd');
 
 		console.log(prevDate, nextDate);
-		fs.writeFileSync(file, '<<' + prevDate + '|' + nextDate + '>>');
+		fs.writeFileSync(`dirPath+file`, '<<' + prevDate + '|' + nextDate + '>>');
 	}
 });

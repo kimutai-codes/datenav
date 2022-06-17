@@ -23,10 +23,12 @@ files.forEach((file, index) => {
 
 		console.log(prevDate, nextDate);
 		const fileLocation = path.join(dirPath, file);
+		//write the file
 		fs.writeFileSync(
 			fileLocation,
 			'<<' + prevDate + '|' + nextDate + '>>',
-			{ flag: 'w+' }
+			{ flag: 'w+' },
+			(err) => {}
 		);
 	}
 });

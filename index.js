@@ -12,8 +12,9 @@ files.forEach((file, index) => {
 	//strip md part and convert to date
 	const strippedFileName = file.replace('.md', '');
 	const fileDate = new Date(strippedFileName);
+  //check if what wre are handling is a real day(journal entry)
 	if (fileDate != 'Invalid Date') {
-		const date = format(new Date(strippedFileName), 'yyyy-MM-dd');
+		const date = format(new Date(fileDate), 'yyyy-MM-dd');
 
 		let nextDay = add(new Date(date), { days: 1 });
 		const nextDate = format(new Date(nextDay), 'yyyy-MM-dd');
@@ -21,14 +22,15 @@ files.forEach((file, index) => {
 		let prevDay = sub(new Date(date), { days: 1 });
 		const prevDate = format(new Date(prevDay), 'yyyy-MM-dd');
 
-		console.log(prevDate, nextDate);
 		const fileLocation = path.join(dirPath, file);
 		//write the file
-		fs.writeFileSync(
+		fs.writeFile(
 			fileLocation,
-			'<<' + prevDate + '|' + nextDate + '>>',
+			`<<${prevDate}|${nextDate}>>`,
 			{ flag: 'w+' },
 			(err) => {}
 		);
 	}
 });
+
+console.log('Done!');
